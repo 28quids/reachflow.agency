@@ -1,0 +1,15 @@
+Branding theme is a light themed site optimised for mobile view and a story telling esc scroll flow with smooth transitions in as each section appears it has a light coral/orange gradient synth wave/ blur cloud dynamic background and dynamic depth in backgrounds with soft drop glow shadows and different geometric patterns. The brand name is reachflow and the logo is white text with an orange gradient flowing through faintly and an orangey coral logo/icon next to it of a wave. The navigation bar has a translucent background effect when scrolling use the secondary coral orange as a way to highlight certain text or it can be used as a drawn on underline to emphasise copy. Use no long em dashes when building 
+
+Hero banner has a large title that says We deliver you the customers you actually want. With the word wan’t in a brand coloured shiny rectangle emphasising it then above it in small text it says attention businesses and underneath it says in small subheading not the ones that waste your time with a “Get A Free Marketing Audit” CTA with the subheading below CTA that says “(in less than 48hrs)”
+
+This button then takes you to the book an audit landing page 
+
+Directly under the hero there is a brief heavily visual “what we do” section that has 3 zig zag card sections explaining our services with imagery. A landing page and funnel design, B Targetted paid traffic via ads and C Lead nurture and  explains our services and then has a quick visual of our onboarding process with a little subnote below that says we offer both one time marketing fixes aswell as post marketing care retainer thingy 
+
+Then a featured projects section that has an automatic scroll of a phone screens displaying previous projects with some text above briefly explaining what each project is with a yellow button label i.e lead gen, done for you ads etc.
+
+Then directly below that is a list of brand logos we have worked with 
+
+Finally there is a get my free marketing audit form, the same one as on the free audit landing page. 
+
+Followed by a simple clean footer

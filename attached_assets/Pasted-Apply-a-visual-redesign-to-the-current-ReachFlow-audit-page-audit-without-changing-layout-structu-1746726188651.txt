@@ -1,0 +1,116 @@
+Apply a visual redesign to the current ReachFlow audit page (/audit) without changing layout structure or copy.
+Reference: original Playstate audit page design (uploaded screenshot).
+The goal is to elevate polish, contrast, and visual impact using ReachFlow’s soft tech aesthetic (light, modern, coral/orange theme).
+
+🔸 GLOBAL STYLING
+Typography:
+
+Use Inter, Satoshi, or similar clean sans-serif
+
+Hero and section headings: 36–44px desktop, bold weight (700+), tight line spacing
+
+Subhead/body: dark gray (#222), high legibility
+
+Add orange taglines (e.g. EXPERIENCED TEAM, SIMPLE & EFFECTIVE) in uppercase, letter-spaced labels above key sections
+
+Colors:
+
+Background: pure white (#ffffff)
+
+Accents: ReachFlow gradient coral-orange (#FF6B2C → #FF9444)
+
+Shadows: subtle soft shadow (e.g. rgba(0,0,0,0.06)) behind all card blocks
+
+Text: black or charcoal for contrast (#1c1c1c)
+
+Spacing:
+
+Add more vertical space between sections (80–100px desktop)
+
+Use more consistent section containers with max-width: 1140px
+
+Hover Effects:
+
+CTA buttons: slight lift on hover, drop shadow glow
+
+Cards: increase elevation and scale slightly on hover
+
+Icons/pills: fade-in hover transitions
+
+🎯 HERO SECTION UPGRADES
+Add a subtle peach/orange radial gradient background blob behind the form and CTA area
+
+Animate form and bullet points with scroll-based fade-in (staggered left and right)
+
+Add floating UI shapes or icons as visual interest — notification bubbles, tick icons, graph markers, etc
+
+Bold the phrase “Get Your Free Audit” above the hero in orange smallcaps
+
+🔥 “WHAT’S COSTING YOU / WHAT YOU COULD HAVE” BLOCK
+Turn both boxes into cards with elevated styling:
+
+Rounded corners
+
+Light background gradient or white with inset shadows
+
+Each list item has a matching red X or green check with a coral icon badge
+
+Right card includes a floating coral CTA button (pop hover + arrow icon)
+
+📊 “OUR AUDIT PROCESS” SECTION
+Rebuild into 3 card-style process blocks:
+
+Icons in circle badge (orange background, white icon)
+
+Cards float above faint peach wave or radial background
+
+Scroll animation: fade-up with stagger delay
+
+Section header has an orange sublabel: SIMPLE & EFFECTIVE
+
+💡 “WHY TRUST REACHFLOW” SECTION
+Add clear 4-card grid layout with elevation/shadow on each
+
+Orange header pill: EXPERIENCED TEAM
+
+Right stat card:
+
+Highlight “10,000+ Leads Generated”
+
+Use orange checkmarks for:
+
+✓ 24/7 Lead Gen
+
+✓ Modern Website
+
+✓ Traffic Control
+
+Add a faint gradient background glow
+
+📈 “NO MORE LEADS LEFT ON THE TABLE” SECTION
+Left column:
+
+Each number badge in large orange circle (consistent sizing)
+
+Align text tightly
+
+Right column (form):
+
+Match hero form styling
+
+Add a light orange radial background blur behind the card
+
+Under form: 3 mini trust icons (check, shield, stars) with coral gradient icon + dark text
+
+⚙️ SITE-WIDE POLISH
+Add entrance animations:
+
+All sections scroll in (fade-up, fade-left, or fade-scale)
+
+CTA buttons pulse once on load
+
+Accent shapes:
+
+Add 3D-style blobs, floating pill elements, blurred shapes in corners (see Playstate ref)
+
+Minimal, but adds polish and depth

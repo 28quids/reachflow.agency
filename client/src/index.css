@@ -1,0 +1,273 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --primary: 16 100% 50%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+    --accent: 16 80% 80%;
+    --accent-foreground: 24 9.8% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --ring: 16 100% 50%;
+    --radius: 0.5rem;
+
+    /* Custom colors for ReachFlow */
+    --orange-light: 35 100% 64%;
+    --orange-default: 16 100% 66%;
+    --orange-dark: 16 100% 45%;
+    --coral-100: 12 100% 95%;
+    --coral-300: 12 100% 85%;
+    --coral-500: 12 100% 75%;
+    --coral-700: 12 100% 65%;
+    --coral-900: 12 100% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-poppins font-bold;
+  }
+}
+
+@layer components {
+  .gradient-bg {
+    @apply bg-gradient-to-r from-orange-500 to-orange-600;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-orange-600;
+  }
+
+  /* Background patterns */
+  .geometric-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff7f50' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .grid-pattern-bg {
+    background-color: #fefefe;
+    background-image: 
+      linear-gradient(rgba(255, 107, 44, 0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 107, 44, 0.15) 1px, transparent 1px);
+    background-size: 30px 30px;
+    background-position: center center;
+    position: relative;
+  }
+
+  /* Removed the ::after pseudo-element that was creating the white overlay */
+
+  .dot-pattern-bg {
+    background-color: #f7f7f7;
+    background-image: 
+      radial-gradient(circle, rgba(255, 107, 44, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* Animations */
+  .section-reveal {
+    @apply opacity-0 translate-y-8;
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 3s infinite alternate;
+  }
+
+  .animate-pulse-subtle {
+    animation: pulseSubtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float 6s ease-in-out 1.5s infinite;
+  }
+  
+  .animate-float-slow {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin 12s linear infinite;
+  }
+
+  .animate-glow {
+    animation: glow 4s ease-in-out infinite alternate;
+  }
+
+  /* KeyFrames */
+  @keyframes pulseGlow {
+    0% { box-shadow: 0 0 15px rgba(255, 107, 44, 0.5); }
+    100% { box-shadow: 0 0 25px rgba(255, 107, 44, 0.8); }
+  }
+
+  @keyframes pulseSubtle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes glow {
+    0% { filter: drop-shadow(0 0 5px rgba(255, 107, 44, 0.2)); }
+    100% { filter: drop-shadow(0 0 15px rgba(255, 107, 44, 0.5)); }
+  }
+
+  /* Blobs and radial glows - reduced intensity */
+  .radial-blur-orange {
+    background: radial-gradient(circle at center, rgba(255, 107, 44, 0.07) 0%, rgba(255, 107, 44, 0) 70%);
+  }
+
+  .radial-blur-peach {
+    background: radial-gradient(circle at center, rgba(255, 175, 144, 0.07) 0%, rgba(255, 175, 144, 0) 70%);
+  }
+
+  .blob-effect {
+    border-radius: 60% 40% 50% 50% / 60% 50% 50% 40%;
+  }
+
+  .blob-effect-2 {
+    border-radius: 40% 60% 70% 30% / 50% 60% 40% 50%;
+  }
+
+  /* UI Elements */
+  .carousel {
+    @apply overflow-hidden whitespace-nowrap;
+  }
+
+  .carousel-content {
+    @apply inline-block whitespace-nowrap;
+    animation: scrollX 20s linear infinite;
+  }
+
+  .carousel-content:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes scrollX {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* 3D Layers */
+  .layer-depth {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .layer-1 {
+    transform: translateZ(20px);
+  }
+
+  .layer-2 {
+    transform: translateZ(40px);
+  }
+
+  .layer-3 {
+    transform: translateZ(60px);
+  }
+
+  .backdrop-blur-subtle {
+    backdrop-filter: blur(2px);
+  }
+  
+  /* Hide scrollbars but allow scrolling */
+  .hideScrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  
+  .hideScrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  
+  /* 3D perspective container for cards */
+  .perspective {
+    perspective: 1600px;
+    transform-style: preserve-3d;
+  }
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuI6fAZ9hiA.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGKYAZ9hiA.woff2) format('woff2');
+}

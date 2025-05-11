@@ -1,0 +1,83 @@
+There is an unwanted white blur or radial glow effect that overlays a large portion of the /audit page, especially the hero and upper-mid sections. It reduces contrast and makes content unreadable.
+
+🔧 Prompt
+Please remove or modify the current background overlay or radial glow that is causing a washed-out effect across the /audit page. Here's what to adjust:
+
+🔍 1. Remove Excessive Blur Layer
+Inspect any container or ::before pseudo-elements (especially attached to <body>, .background, .page-section, or .main-wrapper) that may have the following:
+
+css
+Copy
+Edit
+background: radial-gradient(...white...)  
+filter: blur(...)  
+opacity: 0.4–1
+Remove or greatly reduce the opacity/blur. If it's something like:
+
+css
+Copy
+Edit
+background: radial-gradient(white 30%, transparent 70%);
+Replace it with:
+
+css
+Copy
+Edit
+background: radial-gradient(rgba(255,255,255,0.05), transparent 80%);
+Or remove entirely if not needed.
+
+🎯 2. Check for Light Overlays or SVG Blobs
+Remove any <div> or SVG used as a light source with absolute/fixed positioning that sits over content.
+
+Check for elements like:
+
+html
+Copy
+Edit
+<div class="hero-glow-overlay"></div>
+Or:
+
+css
+Copy
+Edit
+.overlay-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+}
+→ Delete or reduce opacity to 0.03–0.05.
+
+✅ 3. Improve Section Contrast
+For sections like Why Trust ReachFlow, ensure background has contrast against white cards:
+
+css
+Copy
+Edit
+background: #fdfaf7; /* soft peach-tinted grid background */
+Add box-shadow to key cards for better depth:
+
+css
+Copy
+Edit
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+🌐 4. Background Grid & Glow Optimization
+If a background blur is meant to add ambiance, limit it to subtle bottom or corner-based blobs, for example:
+
+css
+Copy
+Edit
+background: radial-gradient(ellipse at 90% 110%, rgba(255, 107, 44, 0.04), transparent 80%);
+Avoid anything centered or full-screen unless extremely faint.
+
+📌 Summary
+Remove or reduce any centered white radial gradients or full-screen overlays
+
+Eliminate or lower opacity on blur/overlay divs
+
+Keep background styling subtle and peripheral
+
+Add card shadows and padding to restore visual hierarchy

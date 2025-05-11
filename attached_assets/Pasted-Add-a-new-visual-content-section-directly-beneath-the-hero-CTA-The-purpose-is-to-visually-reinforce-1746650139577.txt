@@ -1,0 +1,80 @@
+Add a new visual content section directly beneath the hero CTA.
+The purpose is to visually reinforce the promise of qualified lead bookings and contact validation using a modern, techy aesthetic.
+
+🔹 Section Structure
+Full-width container with soft light background (slightly off-white or very light beige to contrast the white of the hero)
+
+Centered layout featuring a large iPhone-style phone mockup as the centerpiece
+
+Two floating visual elements on each side of the phone:
+
+Left side: calendar-style UI card
+
+Right side: contact validation card with profile images + checkmarks
+
+🔸 Layout Details
+1. Phone Mockup (Center)
+Use a stylized phone or device mockup centered on desktop, full-width on mobile
+
+Inside the screen, display:
+
+Large digital clock (e.g., 11:56)
+
+Date line (e.g., “Dec 11, Monday”)
+
+Below the time, show push-style notifications (2 stacked):
+
+Icon: notification bell or app logo
+
+Title: “You’ve booked a new qualified meeting!”
+
+Timestamp (e.g., “1m ago”)
+
+Style these notifications like iOS native alerts: light shadow, soft rounding
+
+2. Left Card — Calendar
+White card styled like a modern date picker/calendar
+
+Use 5×5 grid of light grey boxes with checkmarked blue squares sprinkled throughout
+
+Subtle drop shadow + rounded corners
+
+Floating beside the phone (mobile: stack vertically)
+
+3. Right Card — Contact Verification
+White card with 3 horizontal contact blocks stacked
+
+Each contains:
+
+Circular profile image (placeholder image or avatar)
+
+Name line + optional message line
+
+Right side: blue checkmark or verification tick
+
+Third contact row has no checkmark (dimmed) to visually reinforce the “qualified” theme
+
+🔸 Styling Instructions
+Add fade-up animation on section load (slight delay between phone and side cards)
+
+Use drop shadows on all 3 UI elements (phone + cards) to give floating depth
+
+Place a soft orange blur or radial gradient in the background, behind and slightly below the phone
+
+Mobile responsiveness:
+
+Stack phone mockup above
+
+Calendar and contacts stack below side-by-side or full-width blocks
+
+🔹 Top of Section Text (Optional)
+Place above the visuals (centered text block):
+
+⭐️ Rated 4.9/5 by 30+ businesses
+
+Small star rating graphic
+
+Slightly smaller font than hero, subdued color (dark grey or charcoal)
+
+✅ Purpose
+This visual block builds trust + outcome clarity right after the hero — it makes the promise of real leads and booked calls tangible without relying on just copy.

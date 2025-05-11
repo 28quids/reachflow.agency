@@ -1,0 +1,203 @@
+Build a dedicated Free Marketing Audit landing page for ReachFlow.
+This is a new route/page — do not alter the current homepage.
+Use the visual structure from the uploaded screenshot and the exact copy provided.
+Change all mentions of “Playstate” to “ReachFlow.”
+Use ReachFlow’s brand styling instead of the dark/retro Playstate aesthetic.
+
+✅ PAGE STRUCTURE (SECTION-BY-SECTION)
+🟠 Hero Section (Top Header)
+Layout:
+
+Center-aligned stacked text block
+
+Form box on the left
+
+Bullet checklist on the right
+
+Clean modern aesthetic — no black grid
+
+Copy (Use exactly as given):
+
+Headline:
+
+“You Focus on Delivering” → normal text
+
+“Great Service” → gradient coral/orange (#FF6B2C → #FF9444)
+
+“We’ll Focus on Delivering”
+
+“Great Customers” → same orange gradient
+
+Subhead:
+
+“We’ll analyze your site and funnel - and show you what’s broken with a free audit.”
+
+Design:
+
+White background with faint peach/orange radial blur in corners
+
+Gradient accent blobs or dots floating behind CTA
+
+Form Styling:
+
+Light background form box
+
+Rounded corners, soft inner shadow
+
+Submit button:
+
+Use ReachFlow orange gradient
+
+Hover: glow or slight pop animation
+
+Text: “Request My Free Audit”
+
+Checklist Styling (Right Side):
+
+3 items with checkmark icons:
+
+Still relying on word-of-mouth?
+
+Site looks outdated on mobile?
+
+No real marketing strategy?
+
+Each line inside a bordered, lightly shadowed box
+
+🟠 Section: “The Best Businesses Often Have the Worst Funnels. We Fix That.”
+Layout:
+
+2 columns:
+
+Left card: “What’s Costing You” list
+
+Right card: “What You Could Have” list + yellow CTA button
+
+Title bold and centered above in large dark text
+
+Design:
+
+Soft light background
+
+Each card has:
+
+White background
+
+Rounded edges
+
+Icons beside bullets
+
+Subtle shadow
+
+Highlight CTA button inside right box ("Get Your Free Audit")
+
+🟠 Section: “Our Audit Process”
+Layout:
+
+3-step horizontal layout with icons above text
+
+Include section title + short description
+
+Design:
+
+Each step inside its own card
+
+Icons in orange circle badges
+
+Use ReachFlow colors: soft white card, shadow, coral highlights
+
+Animation on scroll: fade-up staggered
+
+🟠 Section: “Why Trust ReachFlow”
+Update copy to replace "Playstate" with ReachFlow
+
+Layout:
+
+Title centered
+
+3 cards vertically stacked or side-by-side (depending on screen size)
+
+Additional floating stats card on the right side
+
+Design:
+
+Cards with soft border, white background
+
+Icons in coral/orange
+
+Section background: white with very faint orange texture or gradient
+
+Stats Card (Right Side):
+
+Title: “10,000+ Leads Generated”
+
+3 checkmarks below:
+
+✓ 24/7 Lead Gen
+
+✓ Modern Website
+
+✓ Traffic Control
+
+Include: “Backed by results, not geography. We’ve helped brands grow in the UK and globally.”
+
+🟠 Section: “No More Leads Left on the Table”
+Copy: “You don’t need to learn funnels or hire a team. Just let us show you what’s broken.”
+
+Layout:
+
+3-step numbered vertical layout
+
+Each step: number badge, bold title, small caption
+
+Add “Request Your Free Audit” form again underneath
+
+Form Design:
+
+Same as top form: white background, gradient CTA, round borders
+
+Underneath form: "No obligation. You can use our recommendations with any marketing provider."
+
+Trust Badges Under Form:
+
+✓ 10K+ Leads Generated
+
+✓ Trusted by brands that deliver
+
+✓ 5-Star Rated Agency
+
+Display these as horizontal icon badges
+
+🟠 Footer
+Include ReachFlow logo and tagline:
+
+“Marketing systems for businesses who deliver real results.”
+
+“We help great work get seen and convert online.”
+
+Contact email: hello@reachflow.com
+
+Links: Services | Free Audit | Contact | Privacy (footer only)
+
+Visual:
+
+Use ReachFlow footer wave background or light gradient base
+
+Icons should match the new theme (light gray/charcoal + coral highlights)
+
+Add hover effects to all links
+
+🔧 Styling + Visual System
+Font: Satoshi, Inter, or similar modern sans-serif
+
+Primary color: orange/coral gradient #FF6B2C → #FF9444
+
+Accent color: charcoal or dark gray for text #1c1c1c
+
+Button style: large, bold, full-width on mobile
+
+Shadow: rgba(0, 0, 0, 0.08), 20px blur on cards and containers
+
+Section spacing: 100px top/bottom desktop, 64px mobile
+
+Mobile responsiveness required (stack cards, scale font)

@@ -1,0 +1,57 @@
+// Redesign the "Featured Projects" section on the ReachFlow site as follows:
+
+// ✅ Layout: Create a two-column section:
+// Left column = a featured project (case study box)
+// Right column = vertically scrolling list of past projects
+
+// Styling & spacing: Padding around section (min 4rem top/bottom), grid layout with gap-8 or equivalent, responsive for mobile/tablet
+
+// 🟧 Use ReachFlow’s orange/coral brand as the accent for buttons and section headers
+// ⚪️ Keep background white or very light coral tint, with subtle grid dot or line pattern behind for depth
+
+// ---------- LEFT SIDE: FEATURED PROJECT ----------
+/*
+Create a card-style featured project with:
+
+- Title: "Featured Case Study"
+- Project Name: "Green Home Path"
+- Subtitle: “10,000+ Qualified Energy Leads Captured”
+- 2–3 line summary:
+
+  "We built a custom lead system that scraped location- and problem-specific homeowners interested in heat pump installation. These leads were resold profitably to local contractors — now over 10,000 captured and counting."
+
+- Add small orange pill label: “Lead Gen System”
+- Include CTA button: "See How We Did It →"
+- Button styled in coral/orange with soft shadow, hover effect
+- Optional: phone or browser mockup frame if easy, else keep minimal and text-driven
+*/
+
+// ---------- RIGHT SIDE: SCROLLING PROJECT LIST ----------
+/*
+To the right of the case study, build a vertical list that scrolls upward every 5 seconds automatically.
+
+Each list item should be:
+- A simple name with a subtle tag label underneath (use grey pills)
+- Stagger animations slightly for elegance
+- Limit visible items to 3–4 at once (rest scroll into view)
+
+Client names and labels:
+1. Juger Clothing — "DTC Fashion Brand"
+2. Thompson Towers — "Event Venue Funnel"
+3. Nvision Shades — "Product Pre-Launch"
+4. Trading IQ — "Investor-Focused Waitlist"
+5. Clarity Supplements — "Ad Campaign Build"
+6. You? — "Next Case Study In Progress"
+
+- Add an icon or arrow before the list if needed
+- On mobile, stack the featured case and the list vertically
+*/
+
+// ---------- SECTION HEADER ----------
+/*
+Above the grid, add a centered section header:
+- Title: "Where We've Made an Impact"
+- Subtitle (lighter): “Real brands. Real results.”
+
+Style header with large bold H2, ReachFlow orange accent underline or dot
+*/

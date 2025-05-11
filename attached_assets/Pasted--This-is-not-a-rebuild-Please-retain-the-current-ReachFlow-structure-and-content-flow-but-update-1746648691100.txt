@@ -1,0 +1,158 @@
+⚠️ This is not a rebuild.
+Please retain the current ReachFlow structure and content flow, but update the layout and section UI to reflect the visual clarity, UX polish, and responsive layout behavior of the reference site provided. Do not copy their color scheme, branding, or copywriting.
+
+🔹 Global & Base Styling
+Use ReachFlow's existing orange/white color palette
+
+Retain white/light backgrounds, but add depth and visual interest throughout:
+
+Add light orange blurs (CSS blur-style background elements) behind key sections
+
+Use soft floating wave shapes or gradient overlays behind headers/CTA areas
+
+Add drop shadows to cards, buttons, and form inputs for depth
+
+Use rounded corners (8–12px radius) for containers and buttons
+
+🔹 Header / Hero Section
+Keep current ReachFlow headline + subhead and CTA button layout, but apply new structural formatting:
+
+Center-align headline and CTA block
+
+Increase vertical spacing between headline, subtext, and button
+
+Add a floating orange blur background effect behind the content (subtle but noticeable)
+
+CTA button should:
+
+Have a soft orange gradient
+
+On hover: increase brightness and add subtle drop shadow
+
+Add a simple, modern phone mockup or dashboard visual beside or under the headline (similar to the inspiration site, but use your own mockups or image blocks)
+
+Section should animate in with a fade-up + scale in on page load
+
+🔸 Brand Logo Row (Under Hero)
+Convert your "Brands We’ve Worked With" section into a horizontal row of grayscale logos
+
+Use consistent sizing and spacing
+
+Add subtle grayscale-to-color hover effect
+
+Center-aligned, sits directly under hero section with clear padding
+
+Add horizontal divider line or slight background shift for separation
+
+🔹 “What We Do” Service Section
+Convert this into card-based layout with clear icon, service name, and description
+
+Use a 3-column layout on desktop, 1-column stack on mobile
+
+Cards should:
+
+Have slight box shadows
+
+Use soft fade-in and float-up animation on load (staggered timing per card)
+
+Be clickable (if you want service deep links later)
+
+Optional: add subtle background wave or light coral blur behind this section for visual layering
+
+🔹 Process Section ("How It Works")
+Convert current process steps into a horizontal progress-style section
+
+3 boxes (Discovery, Implementation, Optimization) with icons above
+
+Each step should:
+
+Have a step number
+
+Small header
+
+1–2 line description
+
+Uniform card height
+
+Add connecting lines or subtle progress dots between them on desktop
+
+Animate with sequential slide-in from left-right with easing
+
+🔹 Featured Projects Section
+Convert current project grid into a horizontally scrollable row of featured mockups
+
+Each card has:
+
+Project image (mockup or screenshot in a phone/frame)
+
+Project name
+
+Tag/label (e.g. “Lead Gen”, “Landing Page”)
+
+1-line outcome or win
+
+Use shadow and floating animation on hover
+
+Cards animate in from the sides on scroll using fade + slide effect
+
+Add floating orange wave or gradient line behind this section for visual break
+
+🔹 CTA Form (Audit Request)
+Keep existing form structure but apply these layout updates:
+
+Increase spacing between form elements
+
+Add drop shadows and border radius to input fields
+
+Use 2-column layout where screen size allows
+
+Highlight form section with a subtle background tint or white card container
+
+Submit button:
+
+Full width on mobile
+
+Soft gradient orange background
+
+Text: “Get My Free Audit – Delivered in 48hrs”
+
+Hover effect: glow or slight scale-in
+
+Add form entrance animation (fade + scale on scroll into view)
+
+🔹 Footer
+Use same layout as current but:
+
+Slightly tighten spacing and padding
+
+Add soft top divider or wave
+
+Add animation: fade-up on load
+
+Keep footer text and contact minimal (logo, nav, email only)
+
+🔁 Load-In Animation Rules (Global)
+Apply animations per section using these rules:
+
+Hero Section: fade up + scale
+
+Brand Logos: fade in staggered
+
+Service Cards: fade + float up staggered
+
+Process Steps: slide in from side
+
+Project Cards: fade + hover float
+
+Form Section: fade in + slight zoom
+
+Footer: fade up
+
+Use smooth, subtle animation timing (0.4–0.6s) with ease-in-out curves. Ensure performance is mobile-friendly.
+
+Final Notes:
+Maintain responsiveness and readability across devices
+
+Don’t remove or rearrange any of the current homepage sections unless specified
+
+Prioritize loading performance and clean class structure for future updates

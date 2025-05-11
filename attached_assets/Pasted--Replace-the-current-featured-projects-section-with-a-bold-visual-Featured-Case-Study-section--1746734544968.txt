@@ -1,0 +1,41 @@
+// Replace the current featured projects section with a bold, visual "Featured Case Study" section
+// Style it based on the layout seen in the uploaded image (filename: Screenshot 2025-05-08 170513.png)
+// Use ReachFlow's modern aesthetic: clean white/off-white background, orange/coral accents (#FF5A1F), soft shadows, and rounded corners
+// IMPORTANT: All visual elements should animate onto the page on scroll with a subtle fade-in and upward pop motion (0.6s ease-in-out)
+
+// SECTION WRAPPER
+// - Full width section with top padding of 80px and bottom padding of 100px
+// - Background: #FEFAF7 or light gradient to #FFF
+// - Centered headline block at the top with:
+//     - SMALL OVERLINE: "FEATURED CASE STUDY" in uppercase, letter spaced, muted gray
+//     - TITLE: "How We Helped GreenHome Path Capture 10,000+ Leads at Profit" 
+//     - Subtitle: "Real results delivered through smart funnel design and paid traffic strategy."
+
+// CASE STUDY VISUAL DISPLAY
+// - Below the headline, center a horizontally scrolling group of 4 image placeholders
+// - Each placeholder should be:
+//     - 300px width, 200px height
+//     - Rounded corners (16px radius)
+//     - Drop shadow: soft (rgba(0, 0, 0, 0.1), 0px 6px 20px)
+//     - Use light gray placeholder image blocks (or dummy blurred previews)
+//     - Slight 3D tilt or overlap for visual layering
+//     - Animate on scroll: fade in and slightly pop upward
+
+// TEXT CALLOUT
+// - Beneath or beside the images, have a dark text block with:
+//     - "Lead Capture Strategy:"
+//     - Three bullets with orange icons:
+//         - “Hyper-specific location & problem targeting”
+//         - “Built-for-speed scraping tool & funnel”
+//         - “Lead resale to local installers = profit”
+
+// CTA
+// - Below everything, center a CTA: “Want to Be Our Next Case Study?”
+//     - Add a button: “Request Your Free Audit” styled with orange background, white text, rounded corners
+//     - Animate the button hover state with subtle glow or bounce
+
+// RESPONSIVE NOTES:
+// - On desktop: layout is image stack with callout on the right or bottom
+// - On mobile: center-align everything, images become swipeable in carousel format
+// - All elements should preserve padding/margin hierarchy and avoid crowding
+

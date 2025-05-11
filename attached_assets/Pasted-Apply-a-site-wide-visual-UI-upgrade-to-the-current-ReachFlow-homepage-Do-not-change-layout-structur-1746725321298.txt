@@ -1,0 +1,145 @@
+Apply a site-wide visual UI upgrade to the current ReachFlow homepage.
+Do not change layout structure or copy — this is strictly a visual and styling refinement.
+The goal is to bring the UI quality to match premium landing pages like LeadChoice (reference uploaded), making the site feel sharper, more confident, and more professional.
+
+🔹 GLOBAL DESIGN SYSTEM
+Typography
+
+Use a strong, clean sans-serif like Inter, Satoshi, or DM Sans.
+
+All section headings (H1–H2):
+
+Font size: 36–40px desktop, 28–30px mobile
+
+Font weight: 700+
+
+Line height: 1.2
+
+Add orange uppercase label (e.g. OUR SERVICES, FREE AUDIT) above each section header in small caps, 600 weight, letter spacing: 1px.
+
+Colors
+
+Primary: Soft orange gradient #ff6b2c → #ff9444
+
+Accent blur background: light peach rgba(255, 107, 44, 0.08)
+
+Background: Clean white with alternating light gray or warm beige sections
+
+Font color: #1c1c1c (charcoal) for body, pure black for titles
+
+Spacing & Grid
+
+Apply consistent section padding:
+
+100px top/bottom desktop, 64px mobile
+
+Align all sections to a 12-column grid (left-aligned text blocks, centered content cards)
+
+Use fixed max-widths on content (1140px desktop)
+
+🔹 HERO SECTION
+Enlarge the headline, reduce line spacing
+
+Add a radial orange gradient blur behind CTA button
+
+CTA:
+
+Use orange gradient background
+
+Increase size + padding
+
+Hover: glow + upward shift (2px)
+
+Place subtle floating UI elements (e.g. notification toast, charts) with drop shadows
+
+Add fade-up + scale animation on load
+
+🔹 BRANDS ROW
+Switch to grayscale logo strip
+
+On hover: fade into full color
+
+Add horizontal line divider above and below to anchor the row visually
+
+🔹 “WHAT WE DO” SECTION
+Convert each offering into a card container:
+
+White background
+
+12px border-radius
+
+Soft drop shadow (rgba(0, 0, 0, 0.04), blur 24px)
+
+Add hover effect: scale 1.02 + deeper shadow
+
+Add matching icons above each service title
+
+Use a light peach gradient background behind entire section
+
+Animate cards in with staggered fade-up on scroll
+
+🔹 “REACHFLOW EXPERIENCE” SECTION
+Turn each process step (Slack, Loom, Iteration) into distinct horizontal cards
+
+Matching radius, background, and icon styles
+
+Icons in orange badge circles
+
+Connect with horizontal line (desktop only)
+
+Add scroll animation (fade-left/right for outer cards, fade-up center)
+
+🔹 “FEATURED PROJECTS” SECTION
+Cards should:
+
+Have soft card containers with shadows and rounded corners
+
+Show category badge (e.g. “LEAD GEN”) in a floating top-left pill
+
+Gradient background, bold font
+
+Image hover: scale image up slightly, deepen card shadow
+
+Animate in as a slider on desktop, stacked on mobile
+
+🔹 “GET YOUR FREE AUDIT” FORM
+Add white card container with border-radius and full box shadow
+
+Form fields:
+
+Light border, subtle inner shadow
+
+On focus: glow orange
+
+Submit Button:
+
+Use orange gradient
+
+Add hover glow or soft “pulse”
+
+Add faint radial orange blur behind the whole form section
+
+🔹 FOOTER
+Add top wave SVG or curved divider
+
+Reduce padding
+
+Add hover color shift for links
+
+Optional: fade-in animation from bottom
+
+🔹 ANIMATIONS (USE AOS.JS OR SCROLLTRIGGER IF NEEDED)
+Apply consistent, subtle entrance animations across the page:
+
+
+Element	Animation
+Hero headline & button	Fade up + scale
+Cards (services, projects)	Fade up staggered
+Form	Zoom in
+Footer	Fade from bottom
+✅ Bonus Polish
+Add floating decorative shapes (SVG or blurred blobs) tucked in corners of major sections
+
+Add light noise or texture layer over large white sections (optional)
+
+Consider using sticky nav with background shift on scroll

@@ -1,0 +1,128 @@
+This is a visual-only upgrade of the current ReachFlow homepage.
+Do not change copy or layout structure.
+The goal is to make the entire page feel more dynamic, high-converting, and modern, while keeping it clean and on-brand.
+
+🔸 GLOBAL STYLING CHANGES
+Typography Hierarchy
+
+Make section titles like “What We Do,” “Featured Projects,” and “Get Your Free Marketing Audit” stand out visually.
+
+Use larger font size (e.g., 32–40px desktop)
+
+Increase font weight or add slight letter spacing
+
+Optional: use a different display font just for headers
+
+Add orange label-style subheaders above key titles (small, uppercase, 600 weight, e.g. "OUR SERVICES")
+
+Drop Shadows for Depth
+
+Add soft box shadows to:
+
+Card containers (e.g. service blocks, project cards, form)
+
+Phone mockup images
+
+Navigation bar (on scroll only)
+
+Use subtle elevation (e.g., rgba(0,0,0,0.06) blur 12px) to avoid visual clutter
+
+Section Background Contrast
+
+Add faint light-gray or light-orange gradient background fills behind alternating sections
+
+Example: “What We Do” section should sit on a faint off-white or peach-toned background
+
+Use radial orange blur accents tucked in corners behind key visuals (especially “What We Do,” “Form,” “Hero”)
+
+Load-In Animations
+
+Add section-wide fade-in + upward float animations for:
+
+Hero headline and CTA
+
+Section headers
+
+Cards (staggered per column)
+
+Images/mockups (fade + slight zoom)
+
+Animation should trigger once on scroll into viewport
+
+🔹 HERO SECTION IMPROVEMENTS
+Add a large orange blur glow or gradient blob behind the “Get A Free Audit” button
+
+CTA button:
+
+On hover: soft glow or subtle 1–2px upward shift
+
+Text weight increased slightly for punch
+
+Add a shadow and 3D-like lift to floating UI pieces (notification, charts)
+
+🔹 “WHAT WE DO” Section
+Use card-style service containers with background fill (white or very light gray)
+
+Each card:
+
+Box shadow for lift
+
+Rounded corners (12px)
+
+Add hover effect: scale 1.02 and shadow deepen
+
+Title text: larger + bolder
+
+Section background: light gradient (peach → white, subtle)
+
+🔹 THE REACHFLOW EXPERIENCE
+Turn each experience step (Slack, Loom, Iteration) into its own elevated info card
+
+Add icons inside soft-colored circles (background tinted orange)
+
+Add card background fill, rounded corners, shadow
+
+Use matching visual system to the “What We Do” service cards
+
+Optional: Animate each in with 0.2s staggered delay
+
+🔹 PROJECT CARDS
+Add hover animation to each:
+
+Shadow deepen
+
+Image scale up slightly (1.03)
+
+Top-left badge ("Lead Gen", "Audit") should float and animate in (fade down)
+
+Add a soft wave or blur in the background of this section for subtle energy
+
+🔹 FORM SECTION
+Add drop shadow and slight border radius to form container
+
+Background: slight gradient or off-white tint to help it pop from surrounding sections
+
+CTA button:
+
+Make larger and bolder
+
+Use bright orange gradient
+
+On hover: light animation (pulse or slight scale)
+
+🔹 FOOTER
+Add a soft top border or wave divider
+
+Slightly reduce text size
+
+Bring in subtle footer icons hover effect (color change or glow)
+
+✅ MOBILE RESPONSIVENESS
+Ensure all shadows, rounded containers, and gradients scale down naturally
+
+Maintain spacing between floating elements (icons, cards, buttons)
+
+Avoid excessive text stacking by increasing padding
+
+BONUS ✨ OPTIONAL VISUAL ENHANCEMENTS
+Introduce very subtle floating animation (CSS keyframe up/down drift) to decorative blobs or icons

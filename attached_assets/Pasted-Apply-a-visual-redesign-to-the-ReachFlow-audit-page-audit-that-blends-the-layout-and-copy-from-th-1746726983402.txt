@@ -1,0 +1,90 @@
+Apply a visual redesign to the ReachFlow audit page (/audit) that blends the layout and copy from the current version with the visual styling and background depth of the original Playstate lander (see uploaded image).
+Use ReachFlow's modern coral/orange branding, but reintroduce the subtle visual drama: grid texture, light motion, and 3D depth.
+
+🔲 GLOBAL BACKGROUND + DEPTH ELEMENTS
+Implement a custom background system to elevate page quality and depth:
+
+✅ Subtle Grid Background:
+
+Add a light, glowing grid pattern as the main page background.
+
+Use a very soft #fdf2eb or #f7f7f7 base color with a low-opacity orange-tinted grid pattern overlaid.
+
+The grid should feel faint but present — not distracting — and have a subtle radial gradient fade near the hero and CTA blocks.
+
+✅ 3D Floating Elements:
+
+Add lightly blurred, floating UI icons or elements positioned absolutely across sections:
+
+Checkmarks, small window mockups, arrows, form input icons
+
+Slight blur and motion on scroll preferred
+
+Orange accent color #FF6B2C, or translucent coral
+
+✅ Radial Glow Blurs:
+
+Behind each major section (e.g. hero, CTA, audit cards), place blurred background blobs:
+
+Coral/orange radial fade (rgba(255, 107, 44, 0.08))
+
+Use CSS filters or SVG blur shapes
+
+Add light gradient flares from corners to simulate ambient glow
+
+✅ Animated Section Entrances:
+
+Each card and section block should fade in with scale on scroll
+
+Use scroll-fade-up or scroll-zoom-in animations with slight stagger
+
+🟠 SECTION-BY-SECTION STYLE ENHANCEMENTS (retain current layout & copy)
+1. HERO SECTION
+Use the grid background behind everything
+
+Add a faint orange radial blur behind the headline + CTA
+
+Include 2–3 floating UI elements (e.g. checklist icon, mobile mockup, paper plane) around the form and headline
+
+The “Great Service / Great Customers” text should have a gradient text-fill in ReachFlow’s coral-orange
+
+Form gets:
+
+Rounded corners
+
+Soft white shadow
+
+Button has subtle orange glow on hover
+
+2. “THE BEST BUSINESSES…” SECTION
+Wrap both cards inside a section with a subtle peach-tinted glow overlay
+
+Add shadow depth to each card with floating X/checkmark icons
+
+CTA in right card should glow on hover
+
+3. AUDIT PROCESS
+Add grid lines in background behind cards
+
+Each process step should sit on a glowing soft white tile with orange icon badge
+
+Animate cards on scroll (fade-up staggered)
+
+4. WHY TRUST REACHFLOW
+Add a floating trust badge element (e.g. 5-star icon, clipboard, calendar) subtly faded into background
+
+Stat card ("10,000+ Leads") should have glowing gradient behind it with soft shadow
+
+5. NO MORE LEADS SECTION
+Left-side steps:
+
+Number badges should be coral gradient circles with light shadows
+
+Right-side form:
+
+Add a faint radial blur behind the whole form card
+
+Under form:
+
+Add icon-based trust badges with coral icon + dark text
+
