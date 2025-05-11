@@ -52,7 +52,7 @@ export default function AuditForm() {
       await apiRequest("POST", "/api/audit-requests", data);
       setIsSubmitted(true);
       toast({
-        title: "Success!",
+        title: "Succes!",
         description: "Your audit request has been received. We'll be in touch within 48 hours.",
       });
     } catch (error) {
