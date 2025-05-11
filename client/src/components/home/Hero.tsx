@@ -40,15 +40,15 @@ export default function Hero() {
     offset: ["start start", "end start"]
   });
   
-  // Transform values for floating calendar icons
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -50]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const y3 = useTransform(scrollYProgress, [0, 1], [0, -30]);
+  // Transform values for floating calendar icons - reduced range
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -30]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [0, -20]);
   
-  // Transform values for notifications
-  const notificationY1 = useTransform(scrollYProgress, [0, 0.3], [100, 0]);
-  const notificationY2 = useTransform(scrollYProgress, [0.1, 0.4], [100, 0]);
-  const notificationY3 = useTransform(scrollYProgress, [0.2, 0.5], [100, 0]);
+  // Transform values for notifications - reduced range
+  const notificationY1 = useTransform(scrollYProgress, [0, 0.3], [50, 0]);
+  const notificationY2 = useTransform(scrollYProgress, [0.1, 0.4], [50, 0]);
+  const notificationY3 = useTransform(scrollYProgress, [0.2, 0.5], [50, 0]);
   
   const notificationOpacity1 = useTransform(scrollYProgress, [0, 0.3, 0.6], [0, 1, 0]);
   const notificationOpacity2 = useTransform(scrollYProgress, [0.1, 0.4, 0.7], [0, 1, 0]);
@@ -158,19 +158,19 @@ export default function Hero() {
           {/* Bottom left booked slot */}
           <motion.div 
             className="absolute bottom-20 left-8 md:left-[15%] hidden md:block"
-            style={{}}
+            style={{ willChange: 'transform' }}
             initial={{ opacity: 0, rotate: -5 }}
             animate={{ 
               opacity: 1, 
-              rotate: [-8, -6, -8, -10, -8],
-              y: [0, -30, 0, 30, 0], 
-              x: [0, 20, 0, -20, 0] 
+              rotate: [-6, -4, -6],
+              y: [0, -15, 0], 
+              x: [0, 10, 0] 
             }}
             transition={{ 
               opacity: { duration: 0.8 }, 
-              rotate: { duration: 8, repeat: Infinity, ease: "easeInOut" },
-              y: { duration: 8, repeat: Infinity, ease: "easeInOut" }, 
-              x: { duration: 8, repeat: Infinity, ease: "easeInOut" } 
+              rotate: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+              y: { duration: 6, repeat: Infinity, ease: "easeInOut" }, 
+              x: { duration: 6, repeat: Infinity, ease: "easeInOut" } 
             }}
           >
             <div className="bg-white rounded-lg shadow-lg p-2 border border-orange-100 shadow-orange-100/50 transform rotate-12">
@@ -365,12 +365,15 @@ export default function Hero() {
                   <motion.div
                     key={notification.id}
                     className="absolute left-0 right-0 mx-auto max-w-xs w-full"
-                    style={{ top: y }}
+                    style={{ 
+                      top: y,
+                      willChange: 'transform, opacity'
+                    }}
                     initial={{ 
                       opacity: 0, 
-                      y: y + 40,
-                      x: xOffset * 2,
-                      scale: 0.95
+                      y: y + 20,
+                      x: xOffset,
+                      scale: 0.98
                     }}
                     animate={{ 
                       opacity: 1, 
@@ -380,21 +383,21 @@ export default function Hero() {
                     }}
                     exit={{ 
                       opacity: 0, 
-                      y: y - 40,
-                      x: xOffset * 2,
-                      scale: 0.95,
-                      transition: { duration: 0.25 }
+                      y: y - 20,
+                      x: xOffset,
+                      scale: 0.98,
+                      transition: { duration: 0.2 }
                     }}
                     whileHover={{
-                      scale: 1.02,
-                      transition: { duration: 0.15 }
+                      scale: 1.01,
+                      transition: { duration: 0.1 }
                     }}
                     transition={{ 
                       type: "spring",
-                      stiffness: 200,
-                      damping: 20,
+                      stiffness: 150,
+                      damping: 15,
                       mass: 0.5,
-                      delay: index * 0.08
+                      delay: index * 0.05
                     }}
                   >
                     <div className={`${notification.color} bg-opacity-95 backdrop-blur-sm rounded-xl p-3 shadow-xl border border-white/20 relative hover:shadow-2xl transition-shadow duration-300`}>

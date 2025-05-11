@@ -91,60 +91,67 @@
   /* Animations */
   .section-reveal {
     @apply opacity-0 translate-y-8;
+    will-change: transform, opacity;
   }
 
   .animate-pulse-glow {
     animation: pulseGlow 3s infinite alternate;
+    will-change: box-shadow;
   }
 
   .animate-pulse-subtle {
     animation: pulseSubtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    will-change: opacity;
   }
 
   .hover-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
+    will-change: transform;
   }
 
   .hover-lift:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
   }
 
   .animate-float {
     animation: float 6s ease-in-out infinite;
+    will-change: transform;
   }
 
   .animate-float-delayed {
     animation: float 6s ease-in-out 1.5s infinite;
+    will-change: transform;
   }
   
   .animate-float-slow {
     animation: float 8s ease-in-out infinite;
+    will-change: transform;
   }
 
   .animate-spin-slow {
     animation: spin 12s linear infinite;
+    will-change: transform;
   }
 
   .animate-glow {
     animation: glow 4s ease-in-out infinite alternate;
+    will-change: filter;
   }
 
-  /* KeyFrames */
+  /* KeyFrames - Optimized */
   @keyframes pulseGlow {
-    0% { box-shadow: 0 0 15px rgba(255, 107, 44, 0.5); }
-    100% { box-shadow: 0 0 25px rgba(255, 107, 44, 0.8); }
+    0% { box-shadow: 0 0 10px rgba(255, 107, 44, 0.3); }
+    100% { box-shadow: 0 0 15px rgba(255, 107, 44, 0.5); }
   }
 
   @keyframes pulseSubtle {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0.8; }
+    50% { opacity: 0.9; }
   }
 
   @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
   }
 
   @keyframes spin {
@@ -153,8 +160,8 @@
   }
 
   @keyframes glow {
-    0% { filter: drop-shadow(0 0 5px rgba(255, 107, 44, 0.2)); }
-    100% { filter: drop-shadow(0 0 15px rgba(255, 107, 44, 0.5)); }
+    0% { filter: drop-shadow(0 0 3px rgba(255, 107, 44, 0.15)); }
+    100% { filter: drop-shadow(0 0 8px rgba(255, 107, 44, 0.3)); }
   }
 
   /* Blobs and radial glows - reduced intensity */
