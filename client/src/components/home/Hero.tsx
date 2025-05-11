@@ -40,15 +40,15 @@ export default function Hero() {
     offset: ["start start", "end start"]
   });
   
-  // Transform values for floating calendar icons - reduced range
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -30]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, -50]);
-  const y3 = useTransform(scrollYProgress, [0, 1], [0, -20]);
+  // Transform values for floating calendar icons - further reduced range
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -20]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -30]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [0, -15]);
   
-  // Transform values for notifications - reduced range
-  const notificationY1 = useTransform(scrollYProgress, [0, 0.3], [50, 0]);
-  const notificationY2 = useTransform(scrollYProgress, [0.1, 0.4], [50, 0]);
-  const notificationY3 = useTransform(scrollYProgress, [0.2, 0.5], [50, 0]);
+  // Transform values for notifications - further reduced range
+  const notificationY1 = useTransform(scrollYProgress, [0, 0.3], [30, 0]);
+  const notificationY2 = useTransform(scrollYProgress, [0.1, 0.4], [30, 0]);
+  const notificationY3 = useTransform(scrollYProgress, [0.2, 0.5], [30, 0]);
   
   const notificationOpacity1 = useTransform(scrollYProgress, [0, 0.3, 0.6], [0, 1, 0]);
   const notificationOpacity2 = useTransform(scrollYProgress, [0.1, 0.4, 0.7], [0, 1, 0]);
@@ -158,19 +158,20 @@ export default function Hero() {
           {/* Bottom left booked slot */}
           <motion.div 
             className="absolute bottom-20 left-8 md:left-[15%] hidden md:block"
-            style={{ willChange: 'transform' }}
+            style={{ 
+              willChange: 'transform',
+              transform: 'translateZ(0)' // Force GPU acceleration
+            }}
             initial={{ opacity: 0, rotate: -5 }}
             animate={{ 
               opacity: 1, 
-              rotate: [-6, -4, -6],
-              y: [0, -15, 0], 
-              x: [0, 10, 0] 
+              rotate: [-4, -2, -4],
+              y: [0, -10, 0]
             }}
             transition={{ 
-              opacity: { duration: 0.8 }, 
-              rotate: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-              y: { duration: 6, repeat: Infinity, ease: "easeInOut" }, 
-              x: { duration: 6, repeat: Infinity, ease: "easeInOut" } 
+              opacity: { duration: 0.6 }, 
+              rotate: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+              y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
             }}
           >
             <div className="bg-white rounded-lg shadow-lg p-2 border border-orange-100 shadow-orange-100/50 transform rotate-12">
@@ -367,26 +368,24 @@ export default function Hero() {
                     className="absolute left-0 right-0 mx-auto max-w-xs w-full"
                     style={{ 
                       top: y,
-                      willChange: 'transform, opacity'
+                      willChange: 'transform, opacity',
+                      transform: 'translateZ(0)' // Force GPU acceleration
                     }}
                     initial={{ 
                       opacity: 0, 
-                      y: y + 20,
-                      x: xOffset,
+                      y: y + 15,
                       scale: 0.98
                     }}
                     animate={{ 
                       opacity: 1, 
                       y: y,
-                      x: xOffset,
                       scale: 1
                     }}
                     exit={{ 
                       opacity: 0, 
-                      y: y - 20,
-                      x: xOffset,
+                      y: y - 15,
                       scale: 0.98,
-                      transition: { duration: 0.2 }
+                      transition: { duration: 0.15 }
                     }}
                     whileHover={{
                       scale: 1.01,
@@ -394,10 +393,10 @@ export default function Hero() {
                     }}
                     transition={{ 
                       type: "spring",
-                      stiffness: 150,
-                      damping: 15,
+                      stiffness: 100,
+                      damping: 10,
                       mass: 0.5,
-                      delay: index * 0.05
+                      delay: index * 0.03
                     }}
                   >
                     <div className={`${notification.color} bg-opacity-95 backdrop-blur-sm rounded-xl p-3 shadow-xl border border-white/20 relative hover:shadow-2xl transition-shadow duration-300`}>
