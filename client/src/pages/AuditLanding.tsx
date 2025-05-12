@@ -15,7 +15,18 @@ const auditFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
   email: z.string().email({ message: "Please enter a valid email address" }),
   phone: z.string().optional(),
-  website: z.string().url({ message: "Please enter a valid URL" }),
+  website: z.string()
+    .min(1, { message: "Website is required" })
+    .transform((val) => {
+      // If empty, return as is
+      if (!val) return val;
+      
+      // Remove any existing protocol and www
+      let cleanUrl = val.replace(/^(https?:\/\/)?(www\.)?/, '');
+      
+      // Add https://www. if not present
+      return `https://www.${cleanUrl}`;
+    }),
   business: z.string().optional(),
   goals: z.array(z.string()).optional(),
 });
@@ -299,13 +310,13 @@ export default function AuditLanding() {
                   </svg>
                 </div>
                 <input 
-                  type="url" 
+                  type="text" 
                   id={`website-${variant}`}
                   {...form.register("website")} 
                   className={`w-full pl-8 px-3 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all ${
                     form.formState.errors.website ? 'border-red-300' : 'border-gray-200'
                   }`}
-                  placeholder="https://yourcompany.com" 
+                  placeholder="yourcompany.com" 
                 />
               </div>
               <AnimatePresence>

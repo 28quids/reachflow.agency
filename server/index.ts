@@ -1,14 +1,15 @@
 import express, { type Request, Response, NextFunction } from "express";
-import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+import { registerRoutes } from "./routes.js";
+import { setupVite, serveStatic, log } from "./vite.js";
 
-let app: express.Express;
+// Initialize the Express app
+const app = express();
 
-(async () => {
-  app = express();
+async function initializeApp() {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
 
+  // Request logging middleware
   app.use((req, res, next) => {
     const start = Date.now();
     const path = req.path;
@@ -39,35 +40,35 @@ let app: express.Express;
     next();
   });
 
-  const server = await registerRoutes(app);
-
+  // Error handling middleware
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
 
     res.status(status).json({ message });
-    throw err;
+    console.error(err);
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
+  // Initialize routes
+  const server = await registerRoutes(app);
+
+  // Setup static file serving
+  if (process.env.NODE_ENV === 'development') {
     await setupVite(app, server);
   } else {
     serveStatic(app);
   }
 
-  // Use port from environment or default to 5001
-  // this serves both the API and the client
-  const port = process.env.PORT || 5001;
-  
-  // Only start the server if we're not in a serverless environment
+  // Start server if not in Vercel environment
   if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+    const port = process.env.PORT || 5001;
     server.listen(port, () => {
-      log(`serving on port ${port}`);
+      log(`Server running on port ${port}`);
     });
   }
-})();
+}
+
+// Initialize the app
+initializeApp().catch(console.error);
 
 export default app;
