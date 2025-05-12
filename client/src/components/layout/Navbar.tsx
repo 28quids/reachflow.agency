@@ -14,8 +14,7 @@ export default function Navbar() {
   };
 
   const handleLogoClick = () => {
-    // Logo just goes to home page relative to where you left off
-    window.location.href = '/';
+    setLocation('/');
   };
 
   const handleServicesClick = () => {
