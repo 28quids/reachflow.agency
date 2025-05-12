@@ -25,13 +25,41 @@ function getSheets() {
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  // Handle CORS
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+  );
+
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
   try {
+    // Log request details
+    const requestLog = {
+      method: req.method,
+      url: req.url,
+      headers: req.headers,
+      body: req.body,
+      timestamp: new Date().toISOString()
+    };
+    console.log('[Audit Request] Received:', JSON.stringify(requestLog, null, 2));
+
     const data = auditFormSchema.parse(req.body || (typeof req.body === 'string' ? JSON.parse(req.body) : {}));
+    console.log('[Audit Request] Parsed data:', JSON.stringify(data, null, 2));
+    
     const sheets = getSheets();
+    console.log('[Audit Request] Got sheets instance');
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: SPREADSHEET_ID,
@@ -49,12 +77,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       },
     });
 
+    console.log('[Audit Request] Successfully appended to Google Sheets');
     return res.status(201).json({ message: 'Audit request received successfully' });
   } catch (error: any) {
+    // Log error details
+    const errorLog = {
+      name: error.name,
+      message: error.message,
+      stack: error.stack,
+      timestamp: new Date().toISOString()
+    };
+    console.error('[Audit Request] Error:', JSON.stringify(errorLog, null, 2));
+
     if (error instanceof z.ZodError) {
+      console.log('[Audit Request] Validation error:', JSON.stringify(error.errors, null, 2));
       return res.status(400).json({ message: 'Validation error', errors: error.errors });
     }
-    console.error('API error:', error);
     return res.status(500).json({ message: 'Internal server error' });
   }
 } 
