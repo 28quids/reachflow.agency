@@ -27,6 +27,10 @@ function getSheets() {
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  console.log('[API HIT] /api/contact received', req.method, req.url);
+  console.log('[API HIT] Headers:', req.headers);
+  console.log('[API HIT] Body:', req.body);
+
   // Handle CORS
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
