@@ -99,50 +99,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Contact form submission endpoint
-  app.post("/api/contact", async (req, res) => {
-    try {
-      const { name, email, message } = req.body;
-
-      // Validate required fields
-      if (!name || !email) {
-        return res.status(400).json({
-          message: "Name and email are required",
-        });
-      }
-
-      // Add to Google Sheets
-      try {
-        console.log('Attempting to append to Google Sheets (Contact):', {
-          spreadsheetId: SPREADSHEET_ID,
-          range: 'Contact Form!A:C',
-          values: [name, email, message || ''],
-        });
-
-        await sheets.spreadsheets.values.append({
-          spreadsheetId: SPREADSHEET_ID,
-          range: 'Contact Form!A:C', // Name, Email, Message
-          valueInputOption: 'USER_ENTERED',
-          requestBody: {
-            values: [[name, email, message || '']],
-          },
-        });
-        console.log('Successfully appended to Google Sheets (Contact)');
-      } catch (sheetsError) {
-        console.error('Google Sheets Error (Contact):', sheetsError);
-        // Continue with the response even if Sheets fails
-      }
-
-      res.status(201).json({
-        message: "Contact form submitted successfully",
-      });
-    } catch (error) {
-      console.error("Error submitting contact form:", error);
-      res.status(500).json({
-        message: "Failed to submit contact form",
-      });
-    }
-  });
+  // Note: Contact form endpoint has been moved to Vercel serverless function at /api/contact
 
   // Get all audit requests (for admin purposes in a real app)
   app.get("/api/audit-requests", async (req, res) => {
