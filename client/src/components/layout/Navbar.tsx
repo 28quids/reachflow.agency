@@ -15,6 +15,7 @@ export default function Navbar() {
 
   const handleLogoClick = () => {
     setLocation('/');
+    window.scrollTo(0, 0);
   };
 
   const handleServicesClick = () => {
@@ -59,6 +60,7 @@ export default function Navbar() {
 
   const handleAuditClick = () => {
     setLocation('/audit');
+    window.scrollTo(0, 0);
   };
 
   const handleContactClick = () => {

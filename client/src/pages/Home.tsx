@@ -5,7 +5,7 @@ import Footer from "@/components/layout/Footer";
 import Hero from "@/components/home/Hero";
 import BrandLogoRow from "@/components/home/BrandLogoRow";
 import Services from "@/components/home/Services";
-import FeaturedCaseStudy from "@/components/home/FeaturedCaseStudy";
+//import FeaturedCaseStudy from "@/components/home/FeaturedCaseStudy";
 import AuditForm from "@/components/home/AuditForm";
 
 export default function Home() {
@@ -25,7 +25,7 @@ export default function Home() {
         <Hero />
         <BrandLogoRow />
         <Services />
-        <FeaturedCaseStudy />
+        {/*<FeaturedCaseStudy />*/}
         <AuditForm />
       </main>
       <Footer />
