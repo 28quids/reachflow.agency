@@ -10,7 +10,7 @@ import AuditForm from "@/components/home/AuditForm";
 
 export default function Home() {
   useEffect(() => {
-    document.title = "ReachFlow - Lead Generation Agency";
+    document.title = "ReachFlow - Convert More Customers";
   }, []);
 
   return (

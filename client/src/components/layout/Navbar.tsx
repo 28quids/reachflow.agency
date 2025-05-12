@@ -59,8 +59,7 @@ export default function Navbar() {
   };
 
   const handleAuditClick = () => {
-    // Free audit always goes to top of audit page
-    window.location.href = '/audit';
+    setLocation('/audit');
   };
 
   const handleContactClick = () => {
