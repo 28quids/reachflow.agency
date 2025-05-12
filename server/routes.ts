@@ -4,6 +4,25 @@ import { storage } from "./storage";
 import { insertAuditRequestSchema } from "@shared/schema";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
+import { google } from 'googleapis';
+
+// Initialize Google Sheets API
+const auth = new google.auth.GoogleAuth({
+  credentials: {
+    client_email: process.env.GOOGLE_CLIENT_EMAIL,
+    private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+  },
+  scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+});
+
+const sheets = google.sheets({ version: 'v4', auth });
+const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID;
+
+// Log environment variables (without sensitive data)
+console.log('Google Sheets Configuration:');
+console.log('Client Email:', process.env.GOOGLE_CLIENT_EMAIL);
+console.log('Spreadsheet ID:', SPREADSHEET_ID);
+console.log('Private Key Length:', process.env.GOOGLE_PRIVATE_KEY?.length || 0);
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API routes for audit requests
@@ -12,8 +31,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Validate the request body
       const auditRequestData = insertAuditRequestSchema.parse(req.body);
       
-      // Store the audit request
+      // Store the audit request in the database
       const auditRequest = await storage.createAuditRequest(auditRequestData);
+      
+      // Add to Google Sheets
+      try {
+        console.log('Attempting to append to Google Sheets (Audit):', {
+          spreadsheetId: SPREADSHEET_ID,
+          range: 'Audit Requests!A:F',
+          values: [
+            auditRequestData.name,
+            auditRequestData.email,
+            auditRequestData.phone || '',
+            auditRequestData.website,
+            auditRequestData.business || '',
+            auditRequestData.goals?.join(', ') || '',
+          ],
+        });
+
+        await sheets.spreadsheets.values.append({
+          spreadsheetId: SPREADSHEET_ID,
+          range: 'Audit Requests!A:F', // Name, Email, Phone, Website, Business, Goals
+          valueInputOption: 'USER_ENTERED',
+          requestBody: {
+            values: [[
+              auditRequestData.name,
+              auditRequestData.email,
+              auditRequestData.phone || '',
+              auditRequestData.website,
+              auditRequestData.business || '',
+              auditRequestData.goals?.join(', ') || '',
+            ]],
+          },
+        });
+        console.log('Successfully appended to Google Sheets (Audit)');
+      } catch (sheetsError) {
+        console.error('Google Sheets Error (Audit):', sheetsError);
+        // Continue with the response even if Sheets fails
+      }
       
       // Return the created audit request
       res.status(201).json({ 
@@ -33,6 +88,51 @@ export async function registerRoutes(app: Express): Promise<Server> {
           message: "Failed to create audit request" 
         });
       }
+    }
+  });
+
+  // Contact form submission endpoint
+  app.post("/api/contact", async (req, res) => {
+    try {
+      const { name, email, message } = req.body;
+
+      // Validate required fields
+      if (!name || !email) {
+        return res.status(400).json({
+          message: "Name and email are required",
+        });
+      }
+
+      // Add to Google Sheets
+      try {
+        console.log('Attempting to append to Google Sheets (Contact):', {
+          spreadsheetId: SPREADSHEET_ID,
+          range: 'Contact Form!A:C',
+          values: [name, email, message || ''],
+        });
+
+        await sheets.spreadsheets.values.append({
+          spreadsheetId: SPREADSHEET_ID,
+          range: 'Contact Form!A:C', // Name, Email, Message
+          valueInputOption: 'USER_ENTERED',
+          requestBody: {
+            values: [[name, email, message || '']],
+          },
+        });
+        console.log('Successfully appended to Google Sheets (Contact)');
+      } catch (sheetsError) {
+        console.error('Google Sheets Error (Contact):', sheetsError);
+        // Continue with the response even if Sheets fails
+      }
+
+      res.status(201).json({
+        message: "Contact form submitted successfully",
+      });
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+      res.status(500).json({
+        message: "Failed to submit contact form",
+      });
     }
   });
 

@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/utils";
+import { useState, useEffect } from "react";
 
 // Service card data with phone mockups
 const services = [
   {
     id: 1,
-    title: "Pages That Turn Clicks Into Clients",
-    description: "We design high-converting landing pages and sales funnels that turn visitors into customers.",
+    title: "Landing Pages",
+    description: "We design high-converting pages that turn visitors into leads.",
     alignment: "left",
     phoneContent: (
       <div className="bg-gradient-to-b from-orange-500 to-rose-500 h-full rounded-lg p-3">
@@ -31,15 +32,15 @@ const services = [
       </svg>
     ),
     features: [
-      "Conversion-optimized design",
-      "A/B testing for peak performance",
-      "Mobile-friendly experiences"
+      "Optimised for action, not fluff",
+      "Mobile-friendly and fast-loading",
+      "Custom-built to your brand's look and needs"
     ]
   },
   {
     id: 2,
-    title: "Traffic That Actually Converts",
-    description: "We drive qualified leads to your business through strategic ad campaigns across multiple platforms.",
+    title: "Paid Traffic",
+    description: "We run strategic ad campaigns that reach the right people and drive real ROI.",
     alignment: "right",
     phoneContent: (
       <div className="bg-gradient-to-br from-blue-500 to-indigo-600 h-full rounded-lg p-3">
@@ -68,15 +69,15 @@ const services = [
       </svg>
     ),
     features: [
-      "Precise audience targeting",
-      "Cost-effective campaign management",
-      "Continuous optimization"
+      "Hyper-targeted paid ads",
+      "Funnel-aligned placements",
+      "Constantly tested and optimised for conversions"
     ]
   },
   {
     id: 3,
-    title: "Turn Cold Leads Into Booked Calls",
-    description: "We help you build relationships with prospects through personalized communication that guides them toward purchase.",
+    title: "Lead Nurturing",
+    description: "We turn cold leads into conversations with proven outreach systems.",
     alignment: "left",
     phoneContent: (
       <div className="bg-gradient-to-br from-green-500 to-emerald-600 h-full rounded-lg p-3">
@@ -112,9 +113,9 @@ const services = [
       </svg>
     ),
     features: [
-      "Automated email sequences",
-      "Personalized content strategies",
-      "Lead scoring and segmentation"
+      "Personalised cold emails and DMs",
+      "Clear messaging that gets replies",
+      "Straight into your calendar"
     ]
   }
 ];
@@ -224,6 +225,22 @@ const processSteps = [
 ];
 
 export default function Services() {
+  const [shouldAnimate, setShouldAnimate] = useState(true);
+  
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      setShouldAnimate(!mediaQuery.matches);
+      
+      const handleMotionChange = (e: MediaQueryListEvent) => {
+        setShouldAnimate(!e.matches);
+      };
+      
+      mediaQuery.addEventListener('change', handleMotionChange);
+      return () => mediaQuery.removeEventListener('change', handleMotionChange);
+    }
+  }, []);
+
   return (
     <section id="services" className="py-20 relative overflow-hidden">
       {/* Background decorations */}
@@ -254,9 +271,9 @@ export default function Services() {
           transition={{ duration: 0.6 }}
         >
           <span className="inline-block uppercase text-xs font-semibold tracking-wider text-orange-600 mb-2 px-3 py-1 bg-orange-50 rounded-full">OUR SERVICES</span>
-          <h2 className="font-poppins font-bold text-3xl md:text-[40px] leading-tight mb-6 tracking-tight">What We <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">Do</span></h2>
+          <h2 className="font-poppins font-bold text-3xl md:text-[40px] leading-tight mb-6 tracking-tight">How We Help You Get More <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">Customers</span></h2>
           <p className="text-gray-600 max-w-xl mx-auto text-lg">
-            We help businesses attract and convert high-quality leads through strategic digital marketing solutions.
+            These are our core, proven marketing systems — designed to drive growth fast. Got a unique challenge that doesn't fit this mold? We can solve that too.
           </p>
         </motion.div>
         
@@ -266,14 +283,37 @@ export default function Services() {
             <motion.div
               key={service.id}
               className={`flex flex-col-reverse ${service.alignment === "right" ? "md:flex-row-reverse" : "md:flex-row"} gap-10 md:gap-16 items-center`}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.7 }}
-              whileHover={{ y: -5 }}
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    staggerChildren: shouldAnimate ? 0.1 : 0,
+                    delayChildren: shouldAnimate ? 0.1 : 0
+                  }
+                }
+              }}
             >
               {/* Content Side */}
-              <div className="w-full md:w-1/2">
+              <motion.div
+                className={`order-2 lg:order-${service.alignment === "right" ? "2" : "1"}`}
+                variants={{
+                  hidden: { 
+                    opacity: 0,
+                    transform: 'translate3d(0, 20px, 0)'
+                  },
+                  visible: { 
+                    opacity: 1,
+                    transform: 'translate3d(0, 0, 0)',
+                    transition: { duration: 0.6 }
+                  }
+                }}
+                style={{
+                  willChange: 'transform, opacity'
+                }}
+              >
                 <div className="bg-white rounded-xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100">
                   <motion.div 
                     className="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center mb-6 shadow-orange-100/50 shadow-lg"
@@ -285,18 +325,67 @@ export default function Services() {
                     {service.icon}
                   </motion.div>
                   
-                  <h3 className="font-poppins font-bold text-2xl md:text-3xl mb-4">{service.title}</h3>
-                  <p className="text-gray-600 mb-6 text-lg">{service.description}</p>
+                  <motion.h3
+                    className="font-poppins font-bold text-2xl md:text-3xl mb-4"
+                    variants={{
+                      hidden: { 
+                        opacity: 0,
+                        transform: 'translate3d(0, 20px, 0)'
+                      },
+                      visible: { 
+                        opacity: 1,
+                        transform: 'translate3d(0, 0, 0)',
+                        transition: { duration: 0.6 }
+                      }
+                    }}
+                    style={{
+                      willChange: 'transform, opacity'
+                    }}
+                  >
+                    {service.title}
+                  </motion.h3>
+                  <motion.p
+                    className="text-gray-600 mb-6 text-lg"
+                    variants={{
+                      hidden: { 
+                        opacity: 0,
+                        transform: 'translate3d(0, 20px, 0)'
+                      },
+                      visible: { 
+                        opacity: 1,
+                        transform: 'translate3d(0, 0, 0)',
+                        transition: { duration: 0.6, delay: 0.1 }
+                      }
+                    }}
+                    style={{
+                      willChange: 'transform, opacity'
+                    }}
+                  >
+                    {service.description}
+                  </motion.p>
                   
                   <ul className="space-y-3">
                     {service.features.map((feature, idx) => (
                       <motion.li 
                         key={idx} 
                         className="flex items-start"
-                        initial={{ opacity: 0, x: service.alignment === "right" ? 20 : -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.2 + (idx * 0.1) }}
+                        variants={{
+                          hidden: { 
+                            opacity: 0,
+                            transform: `translate3d(${service.alignment === "right" ? "20px" : "-20px"}, 0, 0)`
+                          },
+                          visible: { 
+                            opacity: 1,
+                            transform: 'translate3d(0, 0, 0)',
+                            transition: { 
+                              duration: 0.4,
+                              delay: shouldAnimate ? 0.2 + (idx * 0.1) : 0
+                            }
+                          }
+                        }}
+                        style={{
+                          willChange: 'transform, opacity'
+                        }}
                       >
                         <div className="bg-orange-100 rounded-full p-1 mr-3 mt-0.5 flex-shrink-0">
                           <svg className="w-4 h-4 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -308,10 +397,26 @@ export default function Services() {
                     ))}
                   </ul>
                 </div>
-              </div>
+              </motion.div>
               
               {/* Image or Phone Mockup Side */}
-              <div className="w-full md:w-1/2 flex items-center justify-center">
+              <motion.div
+                className={`order-1 lg:order-${service.alignment === "right" ? "1" : "2"}`}
+                variants={{
+                  hidden: { 
+                    opacity: 0,
+                    transform: 'translate3d(0, 20px, 0)'
+                  },
+                  visible: { 
+                    opacity: 1,
+                    transform: 'translate3d(0, 0, 0)',
+                    transition: { duration: 0.6 }
+                  }
+                }}
+                style={{
+                  willChange: 'transform, opacity'
+                }}
+              >
                 {index === 0 ? (
                   // Landing Pages image for Landing Page & Funnel Design section
                   <motion.div 
@@ -421,7 +526,7 @@ export default function Services() {
                     </div>
                   </motion.div>
                 )}
-              </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>

@@ -7,8 +7,8 @@ import { useIsMobile } from "@/hooks/use-mobile";
 export default function FeaturedCaseStudy() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
-  // Fallback to window size if hook fails
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
+  const [shouldAnimate, setShouldAnimate] = useState(true);
   
   useEffect(() => {
     // Update window width on resize
@@ -16,19 +16,39 @@ export default function FeaturedCaseStudy() {
       setWindowWidth(window.innerWidth);
     };
     
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    // Check for prefers-reduced-motion
+    if (typeof window !== 'undefined') {
+      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      setShouldAnimate(!mediaQuery.matches);
+      
+      const handleMotionChange = (e: MediaQueryListEvent) => {
+        setShouldAnimate(!e.matches);
+      };
+      
+      mediaQuery.addEventListener('change', handleMotionChange);
+      window.addEventListener('resize', handleResize);
+      
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        mediaQuery.removeEventListener('change', handleMotionChange);
+      };
+    }
   }, []);
 
-  // Animation variants
+  // Animation variants with GPU acceleration
   const fadeUpVariant = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { 
+      opacity: 0, 
+      transform: 'translate3d(0, 20px, 0)',
+      willChange: 'transform, opacity'
+    },
     visible: { 
       opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.6, ease: "easeInOut" } 
+      transform: 'translate3d(0, 0, 0)',
+      transition: { 
+        duration: 0.6, 
+        ease: "easeInOut" 
+      }
     }
   };
 
@@ -102,16 +122,37 @@ export default function FeaturedCaseStudy() {
             hidden: {},
             visible: {
               transition: {
-                staggerChildren: 0.3,
-                delayChildren: 0.1
+                staggerChildren: shouldAnimate ? 0.3 : 0,
+                delayChildren: shouldAnimate ? 0.1 : 0
               }
             }
           }}
         >
-          {/* Orange glow effects behind the cards */}
-          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full bg-orange-400/10 blur-3xl opacity-70 pointer-events-none"></div>
-          <div className="absolute left-1/3 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-orange-500/20 blur-3xl opacity-60 pointer-events-none"></div>
-          <div className="absolute right-1/3 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-orange-500/20 blur-3xl opacity-60 pointer-events-none"></div>
+          {/* Optimized blur effects with reduced complexity */}
+          <div 
+            className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full bg-orange-400/10"
+            style={{
+              filter: 'blur(40px)',
+              willChange: 'transform',
+              transform: 'translate3d(-50%, -50%, 0)'
+            }}
+          />
+          <div 
+            className="absolute left-1/3 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-orange-500/20"
+            style={{
+              filter: 'blur(30px)',
+              willChange: 'transform',
+              transform: 'translate3d(-50%, -50%, 0)'
+            }}
+          />
+          <div 
+            className="absolute right-1/3 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-orange-500/20"
+            style={{
+              filter: 'blur(30px)',
+              willChange: 'transform',
+              transform: 'translate3d(50%, -50%, 0)'
+            }}
+          />
           
           <div className="absolute inset-0 flex items-center justify-center perspective">
             {/* IMPORTANT: For proper z-stacking we must ensure the middle card (id 2) is rendered LAST */}
@@ -262,7 +303,7 @@ export default function FeaturedCaseStudy() {
               </div>
               <div className="bg-orange-50 p-3 rounded-lg">
                 <div className="text-sm text-orange-700 font-medium">Lead Cost</div>
-                <div className="text-2xl font-bold text-gray-800">$12.40</div>
+                <div className="text-2xl font-bold text-gray-800">£12.40</div>
               </div>
             </div>
           </motion.div>

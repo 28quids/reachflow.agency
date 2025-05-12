@@ -1,6 +1,6 @@
 import { motion, useAnimationControls } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/utils";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Project type definition
 type Project = {
@@ -63,21 +63,38 @@ const BrandLogoItem = ({ project }: { project: Project }) => {
 };
 
 export default function BrandLogoRow() {
-  // Animation controls for the scrolling effect
   const controls = useAnimationControls();
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const [shouldAnimate, setShouldAnimate] = useState(true);
   
   useEffect(() => {
+    // Check for prefers-reduced-motion
+    if (typeof window !== 'undefined') {
+      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      setShouldAnimate(!mediaQuery.matches);
+      
+      const handleMotionChange = (e: MediaQueryListEvent) => {
+        setShouldAnimate(!e.matches);
+      };
+      
+      mediaQuery.addEventListener('change', handleMotionChange);
+      return () => mediaQuery.removeEventListener('change', handleMotionChange);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!shouldAnimate) return;
+    
     // Calculate the total width needed for animation
     if (scrollerRef.current) {
       const scrollWidth = scrollerRef.current.scrollWidth / 2;
       
-      // Start the animation sequence
+      // Start the animation sequence with optimized transform
       const startAnimation = async () => {
         await controls.start({
           x: -scrollWidth,
           transition: {
-            duration: 25, // Slightly slower for better readability
+            duration: 25,
             ease: "linear",
             repeat: Infinity
           }
@@ -90,7 +107,7 @@ export default function BrandLogoRow() {
     return () => {
       controls.stop();
     };
-  }, [controls]);
+  }, [controls, shouldAnimate]);
 
   return (
     <section className="py-16 border-t border-gray-100 border-b overflow-hidden relative">
@@ -124,6 +141,10 @@ export default function BrandLogoRow() {
             className="flex items-center py-4"
             animate={controls}
             initial={{ x: 0 }}
+            style={{
+              willChange: 'transform',
+              transform: 'translate3d(0, 0, 0)'
+            }}
           >
             {/* First set of projects */}
             <div className="flex items-center">

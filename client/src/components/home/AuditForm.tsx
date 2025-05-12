@@ -52,7 +52,7 @@ export default function AuditForm() {
       await apiRequest("POST", "/api/audit-requests", data);
       setIsSubmitted(true);
       toast({
-        title: "Successoes!",
+        title: "Success!",
         description: "Your audit request has been received. We'll be in touch within 48 hours.",
       });
     } catch (error) {
@@ -76,22 +76,22 @@ export default function AuditForm() {
 
   // Render the audit form using the AuditLanding page style
   const renderAuditForm = () => (
-    <div className="bg-white rounded-xl shadow-xl border border-gray-200 p-4 md:p-6">
+    <div className="w-full max-w-2xl mx-auto bg-white rounded-xl shadow-xl border border-gray-200 p-4 md:p-6">
       {isSubmitted ? (
         <motion.div 
-          className="text-center py-8"
+          className="text-center py-12"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
           <motion.div 
-            className="w-20 h-20 bg-gradient-to-br from-green-100 to-green-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg border border-green-200/50"
+            className="w-24 h-24 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg border border-orange-200/50"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <motion.svg 
-              className="w-10 h-10 text-green-500" 
+              className="w-12 h-12 text-orange-600" 
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor"
@@ -103,7 +103,7 @@ export default function AuditForm() {
             </motion.svg>
           </motion.div>
           <motion.h3 
-            className="font-poppins font-bold text-2xl mb-3 text-gray-800"
+            className="font-poppins font-bold text-3xl mb-4 text-gray-800"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
@@ -111,7 +111,7 @@ export default function AuditForm() {
             Thank You!
           </motion.h3>
           <motion.p 
-            className="text-gray-600 text-lg mb-8"
+            className="text-gray-600 text-lg mb-10 max-w-md mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.8 }}
@@ -125,10 +125,10 @@ export default function AuditForm() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 1 }}
           >
-            <div className="absolute -inset-1 bg-gradient-to-r from-green-400 to-green-500 opacity-30 blur-lg -z-10 rounded-lg"></div>
+            <div className="absolute -inset-1 bg-gradient-to-r from-orange-400 to-orange-500 opacity-30 blur-lg -z-10 rounded-lg"></div>
             <button
               onClick={() => setIsSubmitted(false)}
-              className="bg-gradient-to-r from-green-400 to-green-500 text-white font-medium px-6 py-3 rounded-lg hover:shadow-lg transition-all"
+              className="bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium px-8 py-3 rounded-lg hover:shadow-lg transition-all hover:brightness-110"
             >
               Submit Another Request
             </button>
@@ -333,17 +333,8 @@ export default function AuditForm() {
   );
 
   return (
-    <section id="audit" className="py-24 relative overflow-hidden bg-gradient-to-b from-orange-50/60 via-white to-gray-50">
-      {/* Abstract background elements */}
-      <div className="absolute inset-0 opacity-5" style={{ 
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f97316' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-      }}></div>
-      <div className="absolute -top-40 right-0 w-96 h-96 bg-orange-300 rounded-full opacity-20 blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-white/40 to-transparent"></div>
-      <div className="absolute bottom-10 left-1/3 w-96 h-96 bg-orange-300/30 rounded-full opacity-30 blur-3xl"></div>
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-orange-200 rounded-full opacity-20 blur-2xl"></div>
-      
-      <div className="container mx-auto px-4 relative">
+    <div className="w-full bg-white py-16">
+      <div className="w-full px-4 relative">
         <motion.div 
           className="text-center mb-14 max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
@@ -503,6 +494,6 @@ export default function AuditForm() {
           </div>
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 }

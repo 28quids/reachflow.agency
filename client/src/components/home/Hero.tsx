@@ -40,35 +40,10 @@ export default function Hero() {
     offset: ["start start", "end start"]
   });
   
-  // Transform values for floating calendar icons - further reduced range
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -20]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, -30]);
-  const y3 = useTransform(scrollYProgress, [0, 1], [0, -15]);
-  
-  // Transform values for notifications - further reduced range
-  const notificationY1 = useTransform(scrollYProgress, [0, 0.3], [30, 0]);
-  const notificationY2 = useTransform(scrollYProgress, [0.1, 0.4], [30, 0]);
-  const notificationY3 = useTransform(scrollYProgress, [0.2, 0.5], [30, 0]);
-  
-  const notificationOpacity1 = useTransform(scrollYProgress, [0, 0.3, 0.6], [0, 1, 0]);
-  const notificationOpacity2 = useTransform(scrollYProgress, [0.1, 0.4, 0.7], [0, 1, 0]);
-  const notificationOpacity3 = useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0, 1, 0]);
-
-  // Notifications fade out one by one on scroll, each with its own transform
-  const notificationFadeTransforms = [
-    {
-      opacity: useTransform(scrollYProgress, [0, 0.38, 0.58], [1, 1, 0]),
-      y: useTransform(scrollYProgress, [0, 0.38, 0.58], [0, 0, -40])
-    },
-    {
-      opacity: useTransform(scrollYProgress, [0.18, 0.48, 0.68], [1, 1, 0]),
-      y: useTransform(scrollYProgress, [0.18, 0.48, 0.68], [0, 0, -40])
-    },
-    {
-      opacity: useTransform(scrollYProgress, [0.32, 0.62, 0.82], [1, 1, 0]),
-      y: useTransform(scrollYProgress, [0.32, 0.62, 0.82], [0, 0, -40])
-    }
-  ];
+  // Transform values for floating calendar icons - using transform3d for GPU acceleration
+  const y1 = useTransform(scrollYProgress, [0, 1], ['translate3d(0, 0, 0)', 'translate3d(0, -20px, 0)']);
+  const y2 = useTransform(scrollYProgress, [0, 1], ['translate3d(0, 0, 0)', 'translate3d(0, -30px, 0)']);
+  const y3 = useTransform(scrollYProgress, [0, 1], ['translate3d(0, 0, 0)', 'translate3d(0, -15px, 0)']);
 
   // Only 3 notifications visible, cycling through 10 events
   const [visibleNotifications, setVisibleNotifications] = useState([
@@ -79,9 +54,33 @@ export default function Hero() {
   const poolIndex = useRef(3);
   const notificationId = useRef(4);
 
+  // Add prefers-reduced-motion check and Safari detection
+  const [shouldAnimate, setShouldAnimate] = useState(true);
+  const [isSafari, setIsSafari] = useState(false);
+  
   useEffect(() => {
-    const interval = setInterval(() => {
-      // Get next notification from pool
+    if (typeof window !== 'undefined') {
+      // Check for Safari
+      const isSafariBrowser = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+      setIsSafari(isSafariBrowser);
+      
+      // Check for prefers-reduced-motion
+      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      setShouldAnimate(!mediaQuery.matches && !isSafariBrowser);
+      
+      const handleChange = (e: MediaQueryListEvent) => {
+        setShouldAnimate(!e.matches && !isSafariBrowser);
+      };
+      
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    }
+  }, []);
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
+    const cycle = () => {
       const next = notificationPool[poolIndex.current % notificationPool.length];
       const newNotification = {
         id: notificationId.current++,
@@ -91,13 +90,18 @@ export default function Hero() {
         color: next.color
       };
       poolIndex.current++;
+
       setVisibleNotifications(prev => {
         const updated = [...prev, newNotification];
-        // Only keep the last 3
-        return updated.length > 3 ? updated.slice(updated.length - 3) : updated;
+        return updated.length > 3 ? updated.slice(1) : updated;
       });
-    }, 1700); // 1.7 seconds per notification
-    return () => clearInterval(interval);
+
+      timeoutId = setTimeout(cycle, 1700); // Changed to 1.7s for faster rotation
+    };
+
+    timeoutId = setTimeout(cycle, 1700); // Initial timeout also changed to 1.7s
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
   return (
@@ -124,7 +128,11 @@ export default function Hero() {
           {/* Top right calendar icon */}
           <motion.div 
             className="absolute top-10 right-10 md:right-20 lg:right-[10%] hidden md:block"
-            style={{}}
+            style={{
+              y: shouldAnimate ? y1 : 0,
+              willChange: 'transform',
+              transform: 'translateZ(0)'
+            }}
             initial={{ opacity: 0, rotate: 10 }}
             animate={{ 
               opacity: 1, 
@@ -160,7 +168,7 @@ export default function Hero() {
             className="absolute bottom-20 left-8 md:left-[15%] hidden md:block"
             style={{ 
               willChange: 'transform',
-              transform: 'translateZ(0)' // Force GPU acceleration
+              transform: 'translateZ(0)'
             }}
             initial={{ opacity: 0, rotate: -5 }}
             animate={{ 
@@ -188,7 +196,10 @@ export default function Hero() {
           {/* Top left calendar icon */}
           <motion.div 
             className="absolute top-24 left-4 md:left-[5%] lg:left-[15%] hidden md:block"
-            style={{}}
+            style={{
+              willChange: 'transform',
+              transform: 'translateZ(0)'
+            }}
             initial={{ opacity: 0, rotate: -15 }}
             animate={{ 
               opacity: 1, 
@@ -223,7 +234,10 @@ export default function Hero() {
           {/* Bottom right marketing icon - graph chart */}
           <motion.div 
             className="absolute bottom-40 right-8 md:right-[8%] lg:right-[18%] hidden md:block"
-            style={{}}
+            style={{
+              willChange: 'transform',
+              transform: 'translateZ(0)'
+            }}
             initial={{ opacity: 0, rotate: 8 }}
             animate={{ 
               opacity: 1, 
@@ -258,7 +272,10 @@ export default function Hero() {
           {/* Moved '+5' icon to below the bar chart (bottom right), with slight angle */}
           <motion.div 
             className="absolute bottom-8 right-8 md:right-[8%] lg:right-[18%] hidden md:block"
-            style={{}}
+            style={{
+              willChange: 'transform',
+              transform: 'translateZ(0)'
+            }}
             initial={{ opacity: 0, rotate: 6 }}
             animate={{ 
               opacity: 1, 
@@ -289,7 +306,10 @@ export default function Hero() {
           {/* Bottom left marketing icon - engagement metrics */}
           <motion.div 
             className="absolute bottom-48 left-8 md:left-[12%] hidden md:block"
-            style={{}}
+            style={{
+              willChange: 'transform',
+              transform: 'translateZ(0)'
+            }}
             initial={{ opacity: 0, rotate: -5 }}
             animate={{ 
               opacity: 1, 
@@ -329,14 +349,14 @@ export default function Hero() {
             className="font-poppins font-bold text-4xl md:text-5xl lg:text-[56px] leading-tight mb-8 relative tracking-tight"
             variants={fadeInUp}
           >
-            Not Just More Leads. <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">The Ones That Actually Close.</span>
+            We Build Marketing Systems That <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">Attract</span>, <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">Capture</span> & <span className="inline-block bg-orange-300/30 px-2 text-orange-600 rounded relative">Convert</span> More Customers
           </motion.h1>
           
           <motion.p 
             className="text-xl text-gray-600 mb-10 max-w-2xl"
             variants={fadeInUp}
           >
-            We'll show you exactly where your funnel is leaking and how to fix it.
+            We'll patch up your leaky funnel with a high-converting, custom-built acquisition engine - proven to drive traffic and consistent revenue.
           </motion.p>
           
           <motion.div 
@@ -354,77 +374,60 @@ export default function Hero() {
               <span className="block text-sm mt-1 opacity-90 font-medium">(in less than 48hrs)</span>
             </Link>
           </motion.div>
-          {/* Notification stack: fixed height, absolute notifications for smooth, non-stretching animation */}
-          <div className="relative mt-2 mb-4" style={{ height: '84px', width: '320px', maxWidth: '100%' }}>
-            <AnimatePresence initial={false}>
-              {visibleNotifications.map((notification, index) => {
-                const y = index * 28; // notification height + margin
-                // Subtle left-right-left pattern
-                const xOffset = index === 0 ? -4 : index === 1 ? 4 : -4;
-                
-                return (
-                  <motion.div
+          
+          {/* Notification stack with layout animations */}
+          <div className="relative mt-2 mb-4" style={{ height: '140px', width: '320px', maxWidth: '100%' }}>
+            <motion.ul
+              layout
+              initial={false}
+              className="space-y-[-8px] flex flex-col absolute left-0 right-0 mx-auto max-w-xs w-full"
+            >
+              <AnimatePresence initial={false} mode="popLayout">
+                {visibleNotifications.map((notification, index) => (
+                  <motion.li
                     key={notification.id}
-                    className="absolute left-0 right-0 mx-auto max-w-xs w-full"
-                    style={{ 
-                      top: y,
-                      willChange: 'transform, opacity',
-                      transform: 'translateZ(0)' // Force GPU acceleration
-                    }}
-                    initial={{ 
-                      opacity: 0, 
-                      y: y + 15,
-                      scale: 0.98
-                    }}
+                    layout
+                    initial={{ opacity: 0, y: 20, scale: 0.97 }}
                     animate={{ 
                       opacity: 1, 
-                      y: y,
-                      scale: 1
+                      y: 0, 
+                      scale: 1,
+                      zIndex: 3 - index // Higher index = higher z-index
                     }}
-                    exit={{ 
-                      opacity: 0, 
-                      y: y - 15,
-                      scale: 0.98,
-                      transition: { duration: 0.15 }
+                    exit={{
+                      opacity: 0,
+                      y: -20,
+                      scale: 0.95,
+                      transition: { duration: 0.3, ease: [0.4, 0, 0.2, 1] }
                     }}
-                    whileHover={{
-                      scale: 1.01,
-                      transition: { duration: 0.1 }
+                    transition={{
+                      layout: { duration: 0.4, ease: [0.4, 0, 0.2, 1] }
                     }}
-                    transition={{ 
-                      type: "spring",
-                      stiffness: 100,
-                      damping: 10,
-                      mass: 0.5,
-                      delay: index * 0.03
+                    className={`${notification.color} rounded-xl p-3 shadow-lg border border-white/20 relative text-white backdrop-blur-sm`}
+                    style={{
+                      willChange: 'transform, opacity',
+                      transform: 'translateZ(0)',
+                      marginTop: index === 0 ? 0 : '-8px' // Overlap cards
                     }}
                   >
-                    <div className={`${notification.color} bg-opacity-95 backdrop-blur-sm rounded-xl p-3 shadow-xl border border-white/20 relative hover:shadow-2xl transition-shadow duration-300`}>
-                      {/* Enhanced Glow Effect */}
-                      <div className={`absolute -inset-1 ${notification.color.replace('bg-', 'bg-')} opacity-30 blur-md -z-10 rounded-xl animate-pulse-subtle`}></div>
-                      <div className="flex items-start text-white">
-                        <motion.div 
-                          className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3 flex-shrink-0 shadow-inner"
-                          whileHover={{ scale: 1.1 }}
-                          transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                        >
-                          <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                          </svg>
-                        </motion.div>
-                        <div className="flex-1">
-                          <div className="flex justify-between">
-                            <div className="font-bold text-sm">{notification.title}</div>
-                            <div className="text-xs text-white/80">{notification.time}</div>
-                          </div>
-                          <div className="text-sm font-medium mt-0.5">{notification.message}</div>
+                    <div className="flex items-start">
+                      <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                        <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                        </svg>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex justify-between">
+                          <div className="font-bold text-sm">{notification.title}</div>
+                          <div className="text-xs text-white/80">{notification.time}</div>
                         </div>
+                        <div className="text-sm font-medium mt-0.5">{notification.message}</div>
                       </div>
                     </div>
-                  </motion.div>
-                );
-              })}
-            </AnimatePresence>
+                  </motion.li>
+                ))}
+              </AnimatePresence>
+            </motion.ul>
           </div>
         </div>
       </motion.div>
