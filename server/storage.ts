@@ -51,7 +51,10 @@ export class MemStorage implements IStorage {
       ...insertAuditRequest, 
       id, 
       createdAt: new Date(), 
-      isContacted: false 
+      isContacted: false,
+      phone: insertAuditRequest.phone ?? null,
+      business: insertAuditRequest.business ?? null,
+      goals: insertAuditRequest.goals ?? null
     };
     this.auditRequests.set(id, auditRequest);
     return auditRequest;
