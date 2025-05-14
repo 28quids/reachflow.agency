@@ -7,7 +7,7 @@
     "dev": "vite",
     "dev:api": "tsx watch api/contact.ts api/audit-requests.ts",
     "dev:all": "concurrently \"npm run dev\" \"npm run dev:api\"",
-    "build": "vite build",
+    "build": "tsc && vite build",
     "check": "tsc"
   },
   "dependencies": {
