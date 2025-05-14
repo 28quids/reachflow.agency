@@ -35,12 +35,28 @@ export default function ContactPopup({ isOpen, onClose }: { isOpen: boolean, onC
   const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
     try {
-      // Submit to Google Sheets
-      const response = await apiRequest('POST', '/api/contact', data);
+      console.log('Submitting contact form:', data);
+      
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
       if (!response.ok) {
-        throw new Error('Failed to submit form');
+        const errorText = await response.text();
+        console.error('Contact form submission failed:', {
+          status: response.status,
+          statusText: response.statusText,
+          response: errorText
+        });
+        throw new Error(`Failed to submit form: ${response.status} ${response.statusText}`);
       }
+
+      const result = await response.json();
+      console.log('Contact form submission successful:', result);
 
       toast({
         title: 'Success!',
@@ -49,9 +65,14 @@ export default function ContactPopup({ isOpen, onClose }: { isOpen: boolean, onC
       onClose();
       form.reset();
     } catch (error) {
+      console.error('Contact form error:', {
+        error: error instanceof Error ? error.message : 'Unknown error',
+        stack: error instanceof Error ? error.stack : undefined
+      });
+      
       toast({
         title: 'Error',
-        description: 'Something went wrong. Please try again.',
+        description: error instanceof Error ? error.message : 'Something went wrong. Please try again.',
         variant: 'destructive',
       });
     } finally {
