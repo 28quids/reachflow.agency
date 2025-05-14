@@ -37,7 +37,7 @@ export default function ContactPopup({ isOpen, onClose }: { isOpen: boolean, onC
     try {
       console.log('Submitting contact form:', data);
       
-      const response = await fetch('/api/contact', {
+      const response = await fetch('https://www.reachflow.agency/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
