@@ -5,6 +5,11 @@ import path from "path";
 export default defineConfig({
   plugins: [react()],
   root: "client",
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, './client/src'),
+    },
+  },
   build: {
     outDir: "../dist",
     emptyOutDir: true,
