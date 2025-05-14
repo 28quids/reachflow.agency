@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useToast } from '@/hooks/use-toast';
+import { apiRequest } from '@/lib/queryClient';
 
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters' }),
@@ -35,13 +36,7 @@ export default function ContactPopup({ isOpen, onClose }: { isOpen: boolean, onC
     setIsSubmitting(true);
     try {
       // Submit to Google Sheets
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await apiRequest('POST', '/api/contact', data);
 
       if (!response.ok) {
         throw new Error('Failed to submit form');
